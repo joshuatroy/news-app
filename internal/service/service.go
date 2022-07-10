@@ -4,6 +4,8 @@ package service
 
 import (
 	"context"
+	"fmt"
+
 	"news-app/internal/domain"
 	"news-app/internal/parser"
 )
@@ -25,7 +27,12 @@ func NewService(parser parser.UniversalParser) Service {
 	}
 }
 
-func (s service) GetArticles(context.Context, string) ([]domain.Article, error) {
-	//TODO: implement me
-	return nil, nil
+// GetArticles returns a list of articles given a feed URL
+func (s service) GetArticles(ctx context.Context, feedURL string) ([]domain.Article, error) {
+	feed, err := s.parser.Parse(ctx, feedURL)
+	if err != nil {
+		return nil, fmt.Errorf("failed to parse feed: %w", err)
+	}
+
+	return feed.Articles, nil
 }

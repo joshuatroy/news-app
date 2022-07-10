@@ -6,8 +6,10 @@ import (
 	"io"
 	"net/http"
 	"net/http/httptest"
-	"news-app/internal/domain"
 	"testing"
+
+	"news-app/internal/domain"
+	"news-app/internal/service"
 
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
@@ -36,7 +38,7 @@ func Test_handler_GetArticles(t *testing.T) {
 
 	t.Run("should return articles if service is successful", func(t *testing.T) {
 		ctrl := gomock.NewController(t)
-		mockService := NewMockService(ctrl)
+		mockService := service.NewMockService(ctrl)
 		handler := NewHandler(mockService)
 
 		mockService.EXPECT().GetArticles(gomock.Any(), someFeedURL).Return(someArticles, nil)
@@ -64,7 +66,7 @@ func Test_handler_GetArticles(t *testing.T) {
 
 	t.Run("should return a internal server error if service layer fails", func(t *testing.T) {
 		ctrl := gomock.NewController(t)
-		mockService := NewMockService(ctrl)
+		mockService := service.NewMockService(ctrl)
 		handler := NewHandler(mockService)
 
 		mockService.EXPECT().GetArticles(gomock.Any(), someFeedURL).Return([]domain.Article{}, assert.AnError)
@@ -82,7 +84,7 @@ func Test_handler_GetArticles(t *testing.T) {
 
 	t.Run("should return a bad request if json if request body is invalid", func(t *testing.T) {
 		ctrl := gomock.NewController(t)
-		mockService := NewMockService(ctrl)
+		mockService := service.NewMockService(ctrl)
 		handler := NewHandler(mockService)
 
 		body := []byte(`{"invalid"}`)
@@ -98,7 +100,7 @@ func Test_handler_GetArticles(t *testing.T) {
 
 	t.Run("should return a bad request if url is missing from body", func(t *testing.T) {
 		ctrl := gomock.NewController(t)
-		mockService := NewMockService(ctrl)
+		mockService := service.NewMockService(ctrl)
 		handler := NewHandler(mockService)
 
 		body := []byte(`{"other-data":"some-other-data"}`)

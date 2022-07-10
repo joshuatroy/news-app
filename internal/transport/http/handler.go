@@ -1,29 +1,22 @@
-//go:generate mockgen -package=http -destination=./handler_mock_test.go . Service
 package http
 
 import (
-	"context"
 	"encoding/json"
 	"net/http"
+	"news-app/internal/service"
 
 	"github.com/go-playground/validator/v10"
-	"news-app/internal/domain"
 )
 
 const getArticlesByFeed = "/articles/feed"
 
-// Service is an interface for our service layer for processing domain requests
-type Service interface {
-	GetArticles(context.Context, string) ([]domain.Article, error)
-}
-
 // handler is our internal representation of a http handler
 type handler struct {
-	service Service
+	service service.Service
 }
 
 // NewHandler is a constructor for a http handler
-func NewHandler(service Service) *handler {
+func NewHandler(service service.Service) *handler {
 	return &handler{
 		service: service,
 	}

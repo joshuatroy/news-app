@@ -1,4 +1,4 @@
-//go:generate mockgen -package=parser -destination=./parser_mock_test.go . InternalParser
+//go:generate mockgen -package=parser -destination=./parser_mock.go . InternalParser
 
 package parser
 

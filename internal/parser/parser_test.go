@@ -61,7 +61,7 @@ func Test_parser_Parse(t *testing.T) {
 		}
 		assert.Equal(t, expected, feed)
 	})
-	t.Run("parser should return an error if we fail to parse URL", func(t *testing.T) {
+	t.Run("parser should return an error if we fail to parse FeedURL", func(t *testing.T) {
 		ctrl := gomock.NewController(t)
 		mockInternalParser := NewMockInternalParser(ctrl)
 

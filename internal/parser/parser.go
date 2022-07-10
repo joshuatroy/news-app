@@ -36,7 +36,7 @@ type parser struct {
 	internalParser InternalParser
 }
 
-// Parse function will parse a feed from a URL to a domain.Feed model
+// Parse function will parse a feed from a FeedURL to a domain.Feed model
 func (p parser) Parse(ctx context.Context, url string) (domain.Feed, error) {
 	// Set up a timeout on network call
 	ctx, cancel := context.WithTimeout(ctx, time.Duration(p.timeout)*time.Second)

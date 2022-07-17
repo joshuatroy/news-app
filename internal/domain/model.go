@@ -13,6 +13,7 @@ type Article struct {
 	Description string `json:"description,omitempty"`
 	Content     string `json:"content,omitempty"`
 	Image       Image  `json:"image,omitempty"`
+	URL         string `json:"url,omitempty"`
 }
 
 // Image is our domain representation of an image

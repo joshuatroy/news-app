@@ -5,6 +5,7 @@ package service
 import (
 	"context"
 	"fmt"
+	"sort"
 
 	"news-app/internal/domain"
 	"news-app/internal/parser"
@@ -33,6 +34,11 @@ func (s service) GetArticles(ctx context.Context, feedURL string) ([]domain.Arti
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse feed: %w", err)
 	}
+
+	// sort articles in descending order by published date
+	sort.Slice(feed.Articles, func(i, j int) bool {
+		return feed.Articles[i].Published.After(feed.Articles[j].Published)
+	})
 
 	return feed.Articles, nil
 }

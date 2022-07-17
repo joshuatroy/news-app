@@ -1,5 +1,7 @@
 package domain
 
+import "time"
+
 // Feed is our domain representation of a feed
 type Feed struct {
 	Title       string    `json:"title,omitempty"`
@@ -9,11 +11,12 @@ type Feed struct {
 
 // Article is our domain representation of an article
 type Article struct {
-	Title       string `json:"title,omitempty"`
-	Description string `json:"description,omitempty"`
-	Content     string `json:"content,omitempty"`
-	Image       Image  `json:"image,omitempty"`
-	URL         string `json:"url,omitempty"`
+	Title       string    `json:"title,omitempty"`
+	Description string    `json:"description,omitempty"`
+	Content     string    `json:"content,omitempty"`
+	Image       Image     `json:"image,omitempty"`
+	URL         string    `json:"url,omitempty"`
+	Published   time.Time `json:"published,omitempty"`
 }
 
 // Image is our domain representation of an image

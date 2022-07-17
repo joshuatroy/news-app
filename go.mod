@@ -5,6 +5,8 @@ go 1.18
 require (
 	github.com/go-playground/validator/v10 v10.11.0
 	github.com/golang/mock v1.6.0
+	github.com/gorilla/mux v1.8.0
+	github.com/jonboulle/clockwork v0.3.0
 	github.com/mmcdole/gofeed v1.1.3
 	github.com/stretchr/testify v1.8.0
 )
@@ -15,8 +17,6 @@ require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/go-playground/locales v0.14.0 // indirect
 	github.com/go-playground/universal-translator v0.18.0 // indirect
-	github.com/gorilla/mux v1.8.0 // indirect
-	github.com/jonboulle/clockwork v0.3.0 // indirect
 	github.com/json-iterator/go v1.1.10 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/mmcdole/goxpp v0.0.0-20181012175147-0068e33feabf // indirect

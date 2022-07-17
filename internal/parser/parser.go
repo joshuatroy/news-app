@@ -74,7 +74,7 @@ func mapItemToDomainModel(i *gofeed.Item) domain.Article {
 			Title:       i.Title,
 			Description: i.Description,
 			Content:     i.Content,
-			Image:       mapImagetoDomainModel(i.Image),
+			Image:       mapImageToDomainModel(i.Image),
 			URL:         i.Link,
 			Published:   *i.PublishedParsed,
 		}
@@ -83,7 +83,7 @@ func mapItemToDomainModel(i *gofeed.Item) domain.Article {
 	return domain.Article{}
 }
 
-func mapImagetoDomainModel(i *gofeed.Image) domain.Image {
+func mapImageToDomainModel(i *gofeed.Image) domain.Image {
 	if i != nil {
 		return domain.Image{
 			Title: i.Title,

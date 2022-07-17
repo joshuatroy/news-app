@@ -2,6 +2,7 @@ package http
 
 import (
 	"encoding/json"
+	"github.com/gorilla/mux"
 	"net/http"
 	"news-app/internal/service"
 
@@ -13,17 +14,23 @@ const getArticlesByFeed = "/articles/feed"
 // handler is our internal representation of a http handler
 type handler struct {
 	service service.Service
+	*mux.Router
 }
 
 // NewHandler is a constructor for a http handler
 func NewHandler(service service.Service) *handler {
 	return &handler{
 		service: service,
+		Router:  mux.NewRouter(),
 	}
 }
 
+func (h *handler) ApplyRoutes() {
+	h.HandleFunc(getArticlesByFeed, h.GetArticles).Methods(http.MethodGet)
+}
+
 type getArticlesRequest struct {
-	FeedURL string `json:"feed_url,omitempty" validate:"required"`
+	FeedURL string `json:"feed_url" validate:"required"`
 }
 
 func (h handler) GetArticles(w http.ResponseWriter, r *http.Request) {

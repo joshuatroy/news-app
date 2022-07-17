@@ -4,6 +4,7 @@ import (
 	"context"
 	"news-app/internal/domain"
 	"testing"
+	"time"
 
 	"github.com/golang/mock/gomock"
 	"github.com/mmcdole/gofeed"
@@ -16,15 +17,17 @@ func Test_parser_Parse(t *testing.T) {
 		someTitle       = "someTitle"
 		someDescription = "someDescription"
 		someContent     = "someContent"
+		someTime        = time.Now()
 		someImage       = gofeed.Image{
 			URL:   someURL,
 			Title: someTitle,
 		}
 		someItem = gofeed.Item{
-			Title:       someTitle,
-			Description: someDescription,
-			Content:     someContent,
-			Image:       &someImage,
+			Title:           someTitle,
+			Description:     someDescription,
+			Content:         someContent,
+			Image:           &someImage,
+			PublishedParsed: &someTime,
 		}
 		someFeed = gofeed.Feed{
 			Title:       someTitle,
@@ -56,6 +59,7 @@ func Test_parser_Parse(t *testing.T) {
 						Title: someTitle,
 						URL:   someURL,
 					},
+					Published: someTime,
 				},
 			},
 		}

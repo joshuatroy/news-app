@@ -70,13 +70,18 @@ func mapFeedToDomainModel(f *gofeed.Feed) domain.Feed {
 
 func mapItemToDomainModel(i *gofeed.Item) domain.Article {
 	if i != nil {
+		var published time.Time
+		if i.PublishedParsed != nil {
+			published = *i.PublishedParsed
+		}
+
 		return domain.Article{
 			Title:       i.Title,
 			Description: i.Description,
 			Content:     i.Content,
 			Image:       mapImageToDomainModel(i.Image),
 			URL:         i.Link,
-			Published:   *i.PublishedParsed,
+			Published:   published,
 		}
 	}
 
